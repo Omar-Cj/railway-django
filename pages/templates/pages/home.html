@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home - Django Template Demo{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="hero-container">
+        <div class="hero-content">
+            <h1>Welcome to Django Template Demo</h1>
+            <p class="hero-description">
+                Discover the power and flexibility of Django's template system. 
+                This demo showcases template inheritance, context variables, 
+                template tags, and modern web design patterns.
+            </p>
+            <div class="hero-buttons">
+                <a href="{% url 'about' %}" class="btn btn-primary">Learn More</a>
+                <a href="{% url 'portfolio' %}" class="btn btn-secondary">View Portfolio</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <i class="fas fa-code hero-icon"></i>
+        </div>
+    </div>
+</div>
+
+<div class="features-section">
+    <div class="container">
+        <h2>Template System Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-layer-group"></i>
+                </div>
+                <h3>Template Inheritance</h3>
+                <p>Powerful template inheritance system that allows you to build a base "skeleton" template and extend it with child templates.</p>
+                <div class="feature-demo">
+                    <strong>Example:</strong>
+                    <code>{% verbatim %}{% extends 'base.html' %}{% endverbatim %}</code>
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-tags"></i>
+                </div>
+                <h3>Template Tags</h3>
+                <p>Use built-in and custom template tags to add dynamic functionality to your templates.</p>
+                <div class="feature-demo">
+                    <strong>Current Time:</strong> {% now "F d, Y H:i" %}
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-filter"></i>
+                </div>
+                <h3>Template Filters</h3>
+                <p>Transform variables with filters to format, manipulate, and display data exactly as needed.</p>
+                <div class="feature-demo">
+                    <strong>Uppercase:</strong> {{ "django template demo"|upper }}
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-puzzle-piece"></i>
+                </div>
+                <h3>Context Variables</h3>
+                <p>Pass data from views to templates seamlessly with Django's context system.</p>
+                <div class="feature-demo">
+                    <strong>Framework:</strong> {{ framework_name|default:"Django" }}
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-file-code"></i>
+                </div>
+                <h3>Static Files</h3>
+                <p>Efficiently manage and serve CSS, JavaScript, images, and other static assets.</p>
+                <div class="feature-demo">
+                    <strong>CSS Path:</strong> <code>{% verbatim %}{% static 'css/style.css' %}{% endverbatim %}</code>
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Responsive Design</h3>
+                <p>Build modern, responsive web applications with CSS Grid, Flexbox, and mobile-first approach.</p>
+                <div class="feature-demo">
+                    <strong>Viewport:</strong> Mobile-responsive navigation
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="stats-section">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">{{ total_templates|default:"6" }}</div>
+                <div class="stat-label">Template Files</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">{{ lines_of_code|default:"500+" }}</div>
+                <div class="stat-label">Lines of Code</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">{{ features_count|default:"10" }}</div>
+                <div class="stat-label">Features Demo'd</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Database Queries</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

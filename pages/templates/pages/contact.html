@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact - Django Template Demo{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1>Contact Form Demo</h1>
+        <p class="page-subtitle">Template-driven form without database persistence</p>
+    </div>
+</div>
+
+<div class="contact-section">
+    <div class="container">
+        <div class="contact-grid">
+            <div class="contact-form-container">
+                <h2>Send a Message</h2>
+                <p>This form demonstrates Django template form rendering. Note: Data is not persisted as no database is configured.</p>
+                
+                <form class="contact-form" method="post" id="contactForm">
+                    {% csrf_token %}
+                    
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                        <span class="form-hint">Your full name</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                        <span class="form-hint">We'll never share your email</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Choose a subject...</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="template">Template Question</option>
+                            <option value="django">Django Help</option>
+                            <option value="feedback">Feedback</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required placeholder="Tell us about your project or question..."></textarea>
+                        <span class="form-hint">Minimum 10 characters</span>
+                    </div>
+                    
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="newsletter" value="yes">
+                            <span class="checkmark"></span>
+                            Subscribe to Django updates and tips
+                        </label>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                            Send Message
+                        </button>
+                        <button type="reset" class="btn btn-secondary">
+                            <i class="fas fa-undo"></i>
+                            Reset Form
+                        </button>
+                    </div>
+                </form>
+                
+                {% if form_submitted %}
+                <div class="form-success">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Message Received!</h3>
+                    <p>Thank you for your message. In a real application, this would be saved to a database.</p>
+                    <div class="submitted-data">
+                        <h4>Submitted Data:</h4>
+                        <ul>
+                            <li><strong>Name:</strong> {{ submitted_data.name }}</li>
+                            <li><strong>Email:</strong> {{ submitted_data.email }}</li>
+                            <li><strong>Subject:</strong> {{ submitted_data.subject }}</li>
+                            <li><strong>Newsletter:</strong> {{ submitted_data.newsletter|default:"No" }}</li>
+                            <li><strong>Message:</strong> {{ submitted_data.message|truncatewords:20 }}</li>
+                        </ul>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            
+            <div class="contact-info">
+                <div class="info-card">
+                    <h3>Template Features Demonstrated</h3>
+                    <div class="feature-list">
+                        <div class="feature">
+                            <i class="fas fa-shield-alt"></i>
+                            <div>
+                                <strong>CSRF Protection</strong>
+                                <p>Form includes <code>{% verbatim %}{% csrf_token %}{% endverbatim %}</code> for security</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature">
+                            <i class="fas fa-code"></i>
+                            <div>
+                                <strong>Template Logic</strong>
+                                <p>Conditional display with <code>{% verbatim %}{% if form_submitted %}{% endverbatim %}</code></p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature">
+                            <i class="fas fa-filter"></i>
+                            <div>
+                                <strong>Template Filters</strong>
+                                <p>Data formatting with <code>|truncatewords</code> and <code>|default</code></p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature">
+                            <i class="fas fa-exchange-alt"></i>
+                            <div>
+                                <strong>Context Variables</strong>
+                                <p>Dynamic content from view context</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-card">
+                    <h3>Contact Information</h3>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <strong>Email</strong>
+                                <p>demo@django-templates.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-globe"></i>
+                            <div>
+                                <strong>Website</strong>
+                                <p>django-templates.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <strong>Response Time</strong>
+                                <p>Usually within 24 hours</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-code-branch"></i>
+                            <div>
+                                <strong>Current Time</strong>
+                                <p>{% now "F d, Y H:i T" %}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-card">
+                    <h3>Quick Links</h3>
+                    <div class="quick-links">
+                        <a href="{% url 'home' %}" class="quick-link">
+                            <i class="fas fa-home"></i>
+                            Back to Home
+                        </a>
+                        <a href="{% url 'about' %}" class="quick-link">
+                            <i class="fas fa-info-circle"></i>
+                            About Templates
+                        </a>
+                        <a href="{% url 'portfolio' %}" class="quick-link">
+                            <i class="fas fa-folder-open"></i>
+                            View Portfolio
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="tech-details">
+    <div class="container">
+        <h2>Technical Implementation</h2>
+        <div class="tech-grid">
+            <div class="tech-item">
+                <h3>Form Handling</h3>
+                <p>Form data is processed in the view and passed back to the template for display, demonstrating the request/response cycle without database persistence.</p>
+            </div>
+            <div class="tech-item">
+                <h3>Template Conditional Logic</h3>
+                <p>Uses Django template tags to conditionally display success messages and submitted data based on form submission state.</p>
+            </div>
+            <div class="tech-item">
+                <h3>Static Asset Integration</h3>
+                <p>Form styling and JavaScript functionality are loaded through Django's static file system.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

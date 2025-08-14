@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About - Django Template Demo{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1>About This Demo</h1>
+        <p class="page-subtitle">Understanding Django's Template System</p>
+    </div>
+</div>
+
+<div class="content-section">
+    <div class="container">
+        <div class="content-grid">
+            <div class="content-main">
+                <h2>What is Django's Template System?</h2>
+                <p>
+                    Django's template system is a powerful, designer-friendly way to generate HTML dynamically. 
+                    It separates the presentation layer from the business logic, making it easier for developers 
+                    and designers to collaborate effectively.
+                </p>
+                
+                <h3>Key Components Demonstrated</h3>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <strong>Template Inheritance:</strong>
+                        <p>This page extends the base template using <code>{% verbatim %}{% extends 'base.html' %}{% endverbatim %}</code></p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <strong>Block Tags:</strong>
+                        <p>Content blocks like <code>{% verbatim %}{% block content %}{% endverbatim %}</code> allow child templates to override specific sections</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <strong>URL Reversing:</strong>
+                        <p>Named URLs are reversed using <code>{% verbatim %}{% url 'about' %}{% endverbatim %}</code> for maintainable links</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <strong>Static Files:</strong>
+                        <p>CSS, JS, and images are loaded with <code>{% verbatim %}{% static 'css/style.css' %}{% endverbatim %}</code></p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <strong>Template Tags:</strong>
+                        <p>Built-in tags like <code>{% verbatim %}{% now %}{% endverbatim %}</code> provide dynamic content: {% now "F d, Y" %}</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <strong>Context Variables:</strong>
+                        <p>Data passed from views can be displayed and manipulated in templates</p>
+                    </div>
+                </div>
+                
+                <h3>Template Hierarchy</h3>
+                <div class="template-hierarchy">
+                    <div class="hierarchy-item">
+                        <strong>templates/base.html</strong>
+                        <p>Base template with common structure, navigation, and footer</p>
+                    </div>
+                    <div class="hierarchy-arrow">↓</div>
+                    <div class="hierarchy-item">
+                        <strong>pages/templates/pages/*.html</strong>
+                        <p>Page-specific templates that extend the base template</p>
+                    </div>
+                </div>
+                
+                <h3>No Database Required</h3>
+                <p>
+                    This demo focuses purely on Django's template capabilities without requiring 
+                    any database setup. All data is either static or generated through template 
+                    tags and context variables passed from simple view functions.
+                </p>
+                
+                <div class="tech-stack">
+                    <h3>Technology Stack</h3>
+                    <ul>
+                        <li><strong>Django:</strong> {{ django_version|default:"5.2.5" }} - Web framework</li>
+                        <li><strong>Python:</strong> 3.10+ - Programming language</li>
+                        <li><strong>HTML5:</strong> Semantic markup structure</li>
+                        <li><strong>CSS3:</strong> Modern styling with Grid and Flexbox</li>
+                        <li><strong>JavaScript:</strong> Progressive enhancement</li>
+                        <li><strong>Font Awesome:</strong> Icon library</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="content-sidebar">
+                <div class="sidebar-card">
+                    <h3>Quick Facts</h3>
+                    <div class="fact-item">
+                        <span class="fact-label">Created:</span>
+                        <span class="fact-value">{% now "F Y" %}</span>
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-label">Template Files:</span>
+                        <span class="fact-value">{{ template_count|default:"5" }}</span>
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-label">Framework:</span>
+                        <span class="fact-value">Django {{ django_version|default:"5.2.5" }}</span>
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-label">Database:</span>
+                        <span class="fact-value">None Required</span>
+                    </div>
+                </div>
+                
+                <div class="sidebar-card">
+                    <h3>Navigation</h3>
+                    <ul class="sidebar-nav">
+                        <li><a href="{% url 'home' %}">← Back to Home</a></li>
+                        <li><a href="{% url 'portfolio' %}">View Portfolio →</a></li>
+                        <li><a href="{% url 'contact' %}">Contact Form →</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
